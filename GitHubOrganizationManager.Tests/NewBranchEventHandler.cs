@@ -1,7 +1,5 @@
-using System;
 using Xunit;
 using Moq;
-using Octokit;
 using JTWheeler.GitHubOrganizationManager;
 using System.IO;
 using Microsoft.AspNetCore.Http;

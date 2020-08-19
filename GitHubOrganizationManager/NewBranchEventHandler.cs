@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +6,6 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Octokit;
 
 namespace JTWheeler.GitHubOrganizationManager
 {
@@ -33,7 +31,7 @@ namespace JTWheeler.GitHubOrganizationManager
             string refType = data?.ref_type;
             string reference = data.@ref;
 
-            if (refType == "branch" && reference == "master")
+            if (IsMasterBranch(refType, reference))
             {
                 string owner = data.repository.owner.login;
                 string repositoryName = data.repository.name;
@@ -44,6 +42,11 @@ namespace JTWheeler.GitHubOrganizationManager
             string message = $"message received {requestBody}";
 
             return new OkObjectResult(message);
+        }
+
+        private bool IsMasterBranch(string refType, string reference)
+        {
+            return refType == "branch" && reference == "master";
         }
     }
 }
