@@ -25,8 +25,12 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
     
-    - name: Build
-      run: dotnet build --configuration Release --output ./output
+    - name: 'Resolve Project Dependencies Using Dotnet'
+      shell: pwsh
+      run: |
+        pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
+        dotnet build --configuration Release --output ./output
+        popd
     
     - name: Test
       run: dotnet test --no-restore --verbosity normal
