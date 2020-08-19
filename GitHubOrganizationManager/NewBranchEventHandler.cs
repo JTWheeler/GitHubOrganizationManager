@@ -30,10 +30,16 @@ namespace JTWheeler.GitHubOrganizationManager
 
             dynamic data = JsonConvert.DeserializeObject(requestBody);
 
-            string owner = data.repository.owner.login;
-            string repositoryName = data.repository.name;
+            string refType = data?.ref_type;
+            string reference = data.@ref;
 
-            await GitHubManager.ConfigureBranchProtections(owner, repositoryName, "master");
+            if (refType == "branch" && reference == "master")
+            {
+                string owner = data.repository.owner.login;
+                string repositoryName = data.repository.name;
+
+                await GitHubManager.ConfigureBranchProtections(owner, repositoryName, "master");
+            }
 
             string message = $"message received {requestBody}";
 
