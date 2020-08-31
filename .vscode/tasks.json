@@ -71,7 +71,7 @@
 			"type": "func",
 			"dependsOn": "build",
 			"options": {
-				"cwd": "${workspaceFolder}/GitHubOrganizationManager/bin/Debug/netcoreapp2.1"
+				"cwd": "${workspaceFolder}/GitHubOrganizationManager/bin/Debug/netcoreapp2.2"
 			},
 			"command": "host start",
 			"isBackground": true,
